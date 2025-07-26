@@ -31,14 +31,16 @@ import MyOrder from "./components/Order/MyOrder";
 import OrderDetails from "./components/Order/OrderDetails";
 import Dashboard from "./components/admin/Dashboard.js";
 
+// Axios setup
 axios.defaults.withCredentials = true;
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
   const [stripePromise, setStripePromise] = useState(null);
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
+    const { data } = await axios.get(`/stripeapikey`);
     const promise = await loadStripe(data.stripeApiKey);
     setStripePromise(promise);
   }
