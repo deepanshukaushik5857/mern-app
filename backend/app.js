@@ -12,9 +12,14 @@ dotenv.config({ path: "backend/config/config.env" });
 
 // CORS setup for frontend <-> backend cookie sharing
 app.use(cors({
-  origin: "http://localhost:3000",  // ✅ your React frontend
-  credentials: true                 // ✅ allow cookies to be sent
+  origin: [
+    "http://localhost:3000",
+    "https://your-frontend-name.vercel.app" // replace with actual Vercel domain
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
 }));
+
 
 // Middleware
 app.use(express.json());
